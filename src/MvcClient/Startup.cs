@@ -29,7 +29,7 @@ namespace MvcClient
 
                 app.UseOpenIdConnectAuthentication(options =>
                 {
-                    options.Authority = "https://localhost:44300";
+                    options.Authority = "https://janitor.chinacloudsites.cn";
                     options.ClientId = "mvc6";
                     options.ResponseType = "id_token token";
                     options.Scope = "openid email profile api1";

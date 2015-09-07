@@ -2,20 +2,12 @@
   "webroot": "wwwroot",
 
   "dependencies": {
-    "Kestrel": "1.0.0-beta6",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta6",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
-    "Microsoft.Owin": "3.0.1",
-    "Microsoft.AspNet.Owin": "1.0.0-beta6",
-    "Microsoft.AspNet.DataProtection": "1.0.0-beta6",
-    "IdentityServer3": "2.0.0",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
+    "Microsoft.AspNet.Owin": "1.0.0-beta7",
+    "Microsoft.AspNet.DataProtection": "1.0.0-beta7",
 
-    "Owin.Security.Providers": "1.22.1",
-    "Microsoft.Owin.Security.Facebook": "3.0.1",
-    "Microsoft.Owin.Security.Google": "3.0.1",
-    "Microsoft.Owin.Security.MicrosoftAccount": "3.0.1",
-    "Microsoft.Owin.Security.Twitter": "3.0.1",
-    "Owin.Security.AesDataProtectorProvider": "1.1.0.0",
     "Newtonsoft.Json": "7.0.1",
     "Serilog": "1.5.9"
   },
@@ -30,6 +22,16 @@
       "frameworkAssemblies": {
         "System.Security": "",
         "System.Runtime": ""
+      },
+      "dependencies": {
+        "IdentityServer3": "2.0.0",
+        "Microsoft.Owin": "3.0.1",
+        "Owin.Security.AesDataProtectorProvider": "1.1.0.0",
+        "Owin.Security.Providers": "1.22.1",
+        "Microsoft.Owin.Security.Facebook": "3.0.1",
+        "Microsoft.Owin.Security.Google": "3.0.1",
+        "Microsoft.Owin.Security.MicrosoftAccount": "3.0.1",
+        "Microsoft.Owin.Security.Twitter": "3.0.1"
       }
     }
   },

@@ -2,19 +2,17 @@
 using Microsoft.Framework.DependencyInjection;
 using System.Security.Cryptography.X509Certificates;
 using IdentityServer3.Core.Configuration;
-using Microsoft.Framework.Runtime;
+using Microsoft.Dnx.Runtime;
 using System.IO;
-using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.MicrosoftAccount;
 using Microsoft.Owin.Security.Twitter;
 using Owin;
 using Owin.Security.Providers.GitHub;
-using Owin.Security.AesDataProtectorProvider;
 using Serilog;
 
-namespace IdentityServerAspNet5
+namespace Janitor
 {
     public class Startup
     {
@@ -28,20 +26,20 @@ namespace IdentityServerAspNet5
             var certFile = Path.Combine(env.ApplicationBasePath, "idsrv3test.pfx");
             Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Trace().CreateLogger();
 
-            var idsrvOptions = new IdentityServerOptions
+            var options = new IdentityServerOptions
             {
                 Factory = new IdentityServerServiceFactory().UseInMemoryUsers(Users.Get()).UseInMemoryClients(Clients.Get()).UseInMemoryScopes(Scopes.Get()),
                 SigningCertificate = new X509Certificate2(certFile, "idsrv3test"),
                 AuthenticationOptions = new AuthenticationOptions
                 {
-                    IdentityProviders = ConfigureAdditionalIdentityProviders,
+                    IdentityProviders = ConfigureIdentityProviders,
                 }
             };
 
-            app.UseIdentityServer(idsrvOptions);
+            app.UseIdentityServer(options);
         }
 
-        private static void ConfigureAdditionalIdentityProviders(IAppBuilder app, string signInAsType)
+        private static void ConfigureIdentityProviders(IAppBuilder app, string signInAsType)
         {
             var google = new GoogleOAuth2AuthenticationOptions
             {

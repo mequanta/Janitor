@@ -20,11 +20,14 @@ namespace Api1
             {
                 options.Authority = "https://localhost:44300";
                 options.Audience = "https://localhost:44300/resources";
+
+             //   options.Authority = "https://janitor.chinacloudsites.cn";
+            //    options.Audience = "https://janitor.chinacloudsites.cn/resources";
+                
                 options.AutomaticAuthentication = true;
             });
 
             app.UseMiddleware<RequiredScopesMiddleware>(new List<string> { "api1" });
-
             app.UseMvc();
         }
     }

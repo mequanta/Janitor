@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+
 namespace Api1
 {
     public class RequiredScopesMiddleware
@@ -24,7 +25,12 @@ namespace Api1
             {
                 if (!ScopePresent(context.User))
                 {
-                    context.Response.OnSendingHeaders(Send403, context);
+               //     context.Response.OnSendingHeaders(Send403, context);
+                    context.Response.OnStarting(s =>
+                    {
+                        Send403(s);
+                        return Task.FromResult(0);
+                    }, context);
                     return;
                 }
             }

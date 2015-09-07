@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer3.Core.Models;
 
-namespace IdentityServerAspNet5
+namespace Janitor
 {
     public class Clients
     {
@@ -9,7 +9,7 @@ namespace IdentityServerAspNet5
         {
             return new List<Client>
             {
-                new Client
+                 new Client
                 {
                     ClientName = "Test Client",
                     ClientId = "test",
@@ -17,10 +17,12 @@ namespace IdentityServerAspNet5
                     {
                         new Secret("secret".Sha256())
                     },
-
                     // server to server communication
                     Flow = Flows.ClientCredentials,
-
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://janitor.chinacloudsites.cn"
+                    },
                     // only allowed to access api1
                     AllowedScopes = new List<string>
                     {
@@ -30,23 +32,17 @@ namespace IdentityServerAspNet5
 
                 new Client
                 {
-                    ClientName = "MVC6 Demo Client",
-                    ClientId = "mvc6",
-
-                    // human involved
-                    Flow = Flows.Implicit,
-
-                    RedirectUris = new List<string>
+                    ClientName = "Silicon on behalf of Carbon Client",
+                    ClientId = "carbon",
+                    Enabled = true,
+                    AccessTokenType = AccessTokenType.Reference,
+                    Flow = Flows.ResourceOwner,
+                    ClientSecrets = new List<Secret>
                     {
-                        "http://localhost:2221/",
+                        new Secret("carbonsecret".Sha256())
                     },
-
-                    // access to identity data and api1
                     AllowedScopes = new List<string>
                     {
-                        "openid",
-                        "email",
-                        "profile",
                         "api1"
                     }
                 }

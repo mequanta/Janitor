@@ -11,6 +11,7 @@ namespace Api1
         [Authorize]
         public IActionResult Get()
         {
+
             var claims = from c in User.Claims
                          select new { c.Type, c.Value };
 
