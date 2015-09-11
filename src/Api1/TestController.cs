@@ -11,11 +11,18 @@ namespace Api1
         [Authorize]
         public IActionResult Get()
         {
-            Console.WriteLine("hhh");
             var caller = User as ClaimsPrincipal;
-
-            var subjectClaim = caller.FindFirst("sub");
+		    var subjectClaim = caller.FindFirst("sub");	
             IActionResult r;
+/*			r = Json(new
+                {
+                    message = "OK",
+                    subject = subjectClaim.Value
+                });
+			return r;
+			*/
+
+
             if (subjectClaim != null)
             {
                 r = Json(new
@@ -35,6 +42,7 @@ namespace Api1
             }
 
             return r;
+		
         }
     }
 }

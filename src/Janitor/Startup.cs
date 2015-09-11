@@ -16,6 +16,7 @@ using IdentityServer3.Core.Configuration;
 using IdentityServer3.WsFederation.Configuration;
 using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
+using IdentityServer3.Core.Services.InMemory;
 using IdentityServer3.WsFederation.Models;
 using IdentityServer3.WsFederation.Services;
 
@@ -118,11 +119,21 @@ namespace Janitor
                     .UseInMemoryClients(Clients.Get())
                     .UseInMemoryScopes(Scopes.Get());
 
+            var viewOptions = new DefaultViewServiceOptions();
+            viewOptions.Stylesheets.Add("/Content/Site.css");
+            viewOptions.CacheViews = false;
+            factory.ConfigureDefaultViewService(viewOptions);
+
             //var userService = new LocalRegistrationUserService();
             //factory.UserService = new Registration<IUserService>(resolver => userService);
             factory.ViewService = new IdentityServer3.Core.Configuration.Registration<IViewService>(typeof(CustomViewService));
-//            factory.UserService = new Registration<IUserService, UserService>();
-            factory.CorsPolicyService = new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService() { AllowAll = true });
+            //            factory.UserService = new Registration<IUserService, UserService>();
+
+         //   factory.ClaimsProvider = new IdentityServer3.Core.Configuration.Registration<IClaimsProvider>(typeof(CustomClaimsProvider));
+        //    factory.UserService = new IdentityServer3.Core.Configuration.Registration<IUserService>(typeof(CustomUserService));
+        //    factory.CustomGrantValidators.Add(new IdentityServer3.Core.Configuration.Registration<ICustomGrantValidator>(typeof(CustomGrantValidator)));
+        //    factory.CorsPolicyService = new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService() { AllowAll = true });
+            factory.CorsPolicyService = new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new InMemoryCorsPolicyService(Clients.Get()));
             var options = new IdentityServerOptions
             {
                 SiteName = "Janitor - Mequanta Identity Service",

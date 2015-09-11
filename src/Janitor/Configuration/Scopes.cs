@@ -27,6 +27,18 @@ namespace Janitor
                         DisplayName = "Write data",
                         Type = ScopeType.Resource,
                         Emphasize = true,
+                    },
+                    new Scope
+                    {
+                        Name = "api1",
+                        DisplayName = "API 1",
+                        Type = ScopeType.Resource,
+
+                        Claims= new List<ScopeClaim>
+                        {
+                            new ScopeClaim("role")
+                        }
+                   
                     }
                 };
         }

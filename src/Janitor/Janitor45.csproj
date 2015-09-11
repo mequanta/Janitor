@@ -207,6 +207,8 @@
     <Content Include="Content\libs\bootstrap\less\utilities.less" />
     <Content Include="Content\libs\bootstrap\less\variables.less" />
     <Content Include="Content\libs\bootstrap\less\wells.less" />
+    <Content Include="..\..\..\Janitor\src\Janitor\templates\permissions.html" />
+    <Content Include="..\..\..\Janitor\src\Janitor\templates\_login.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
@@ -216,7 +218,11 @@
     <Compile Include="Configuration\RelyingParties.cs" />
     <Compile Include="Configuration\Scopes.cs" />
     <Compile Include="Configuration\Users.cs" />
+    <Compile Include="CustomClaimsProvider.cs" />
+    <Compile Include="CustomGrantValidator.cs" />
+    <Compile Include="CustomUserService.cs" />
     <Compile Include="CustomViewService.cs" />
+    <Compile Include="HrdUserService.cs" />
     <Compile Include="LocalRegistrationUserService.cs" />
     <Compile Include="SimpleIdentityManagerServiceExtensions.cs" />
     <Compile Include="Startup.cs" />
@@ -226,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="templates\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

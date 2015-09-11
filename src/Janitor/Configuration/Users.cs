@@ -11,20 +11,24 @@ namespace Janitor
         {
             return new List<InMemoryUser>
             {
-                new InMemoryUser{Subject = "alice", Username = "alice", Password = "alice", 
+                new InMemoryUser{Subject = "alice8187", Username = "alice", Password = "alice", 
                     Claims = new Claim[]
                     {
                         new Claim(Constants.ClaimTypes.GivenName, "Alice"),
                         new Claim(Constants.ClaimTypes.FamilyName, "Smith"),
                         new Claim(Constants.ClaimTypes.Email, "AliceSmith@email.com"),
+                        new Claim(Constants.ClaimTypes.Role, "Admin"),
+                        new Claim(Constants.ClaimTypes.Role, "Geek"),
                     }
                 },
-                new InMemoryUser{Subject = "bob", Username = "bob", Password = "bob", 
+                new InMemoryUser{Subject = "bob8842", Username = "bob", Password = "bob", 
                     Claims = new Claim[]
                     {
                         new Claim(Constants.ClaimTypes.GivenName, "Bob"),
                         new Claim(Constants.ClaimTypes.FamilyName, "Smith"),
                         new Claim(Constants.ClaimTypes.Email, "BobSmith@email.com"),
+                        new Claim(Constants.ClaimTypes.Role, "Developer"),
+                        new Claim(Constants.ClaimTypes.Role, "Geek"),
                     }
                 },
             };

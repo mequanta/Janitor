@@ -1,59 +1,41 @@
 using System;
 using IdentityModel.Client;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 public class Program
 {
     public static void Main()
     {
-        UseToken(GetToken1());
-        UseToken(GetUserToken1());
+        string local = "https://localhost:44333/connect/token";
+		string remote = "https://janitor.chinacloudsites.cn/connect/token";
+		string apiUrl = "http://localhost:5000/test";
+	   // DoCall(local, apiUrl);
+        DoCall(remote, apiUrl);
     }
-
-
-    static void UseToken(TokenResponse token)
+	
+	static void DoCall(string tokenUrl, string apiUrl)
+	{
+	    var token1 = GetToken(tokenUrl, "test", "secret", "api1");
+	    Console.WriteLine(CallApi(token1, apiUrl));
+        token1 = GetToken(tokenUrl, "test1", "secret1", "api1", "bob", "bob");
+	    Console.WriteLine(CallApi(token1, apiUrl));	
+	}
+    static string CallApi(TokenResponse token, string endpoint)
     {
         Console.WriteLine(token.AccessToken);
-        Console.WriteLine(token.Raw);
         var client = new HttpClient();
         client.SetBearerToken(token.AccessToken);
-        Console.WriteLine(client.GetStringAsync("http://localhost:5000/test").Result);
+        return client.GetStringAsync(endpoint).Result;
     }
 
-    static TokenResponse GetToken()
+    static TokenResponse GetToken(string tokenUrl, string clientId, string secret, string scope, string username = null, string password = null)
     {
-        var client = new TokenClient(
-             "https://localhost:44300/connect/token",
-            "test",
-            "secret");
-        return client.RequestClientCredentialsAsync("api1").Result;
-    }
-    static TokenResponse GetUserToken()
-    {
-        var client = new TokenClient(
-            "https://localhost:44300/connect/token",
-            "carbon",
-            "carbonsecret");
-
-        return client.RequestResourceOwnerPasswordAsync("bob", "bob", "api1").Result;
-    }
-
-    static TokenResponse GetToken1()
-    {
-        var client = new TokenClient(
-             "https://janitor.chinacloudsites.cn/connect/token",
-            "test",
-            "secret");
-        return client.RequestClientCredentialsAsync("api1").Result;
-    }
-    static TokenResponse GetUserToken1()
-    {
-        var client = new TokenClient(
-            "https://janitor.chinacloudsites.cn/connect/token",
-            "carbon",
-            "carbonsecret");
-
-        return client.RequestResourceOwnerPasswordAsync("bob", "bob", "api1").Result;
+        var client = new TokenClient(tokenUrl, clientId, secret);
+       if (string.IsNullOrWhiteSpace(username)||string.IsNullOrWhiteSpace(password))
+            return client.RequestClientCredentialsAsync(scope).Result;
+        else
+            return client.RequestResourceOwnerPasswordAsync(username, password, scope).Result;
     }
 }
 

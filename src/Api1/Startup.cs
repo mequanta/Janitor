@@ -18,8 +18,8 @@ namespace Api1
 
             app.UseOAuthBearerAuthentication(options =>
             {
-                options.Authority = "https://localhost:44300";
-                options.Audience = "https://localhost:44300/resources";
+                options.Authority = "https://localhost:44333";
+                options.Audience = "https://localhost:44333/resources";
 
 //                options.Authority = "https://janitor.chinacloudsites.cn";
 //                options.Audience = "https://janitor.chinacloudsites.cn/resources";
