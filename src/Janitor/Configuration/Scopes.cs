@@ -8,26 +8,27 @@ namespace Janitor
         public static IEnumerable<Scope> Get()
         {
             return new[]
-            {
-                // standard OpenID Connect scopes
-                StandardScopes.OpenId,
-                StandardScopes.ProfileAlwaysInclude,
-                StandardScopes.EmailAlwaysInclude,
-
-                // API - access token will 
-                // contain roles of user
-                new Scope
                 {
-                    Name = "api1",
-                    DisplayName = "API 1",
-                    Type = ScopeType.Resource,
+                    StandardScopes.OpenId,
+                    StandardScopes.Profile,
+                    StandardScopes.Email,
+                    StandardScopes.OfflineAccess,
 
-                    Claims = new List<ScopeClaim>
+                    new Scope
                     {
-                        new ScopeClaim("role")
+                        Name = "read",
+                        DisplayName = "Read data",
+                        Type = ScopeType.Resource,
+                        Emphasize = false,
+                    },
+                    new Scope
+                    {
+                        Name = "write",
+                        DisplayName = "Write data",
+                        Type = ScopeType.Resource,
+                        Emphasize = true,
                     }
-                }
-            };
+                };
         }
     }
 }

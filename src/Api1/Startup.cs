@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Api1
 {
@@ -14,15 +14,15 @@ namespace Api1
 
         public void Configure(IApplicationBuilder app)
         {
-            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseOAuthBearerAuthentication(options =>
             {
                 options.Authority = "https://localhost:44300";
                 options.Audience = "https://localhost:44300/resources";
 
-             //   options.Authority = "https://janitor.chinacloudsites.cn";
-            //    options.Audience = "https://janitor.chinacloudsites.cn/resources";
+//                options.Authority = "https://janitor.chinacloudsites.cn";
+//                options.Audience = "https://janitor.chinacloudsites.cn/resources";
                 
                 options.AutomaticAuthentication = true;
             });

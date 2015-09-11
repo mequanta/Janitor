@@ -1,22 +1,25 @@
 ﻿{
   "webroot": "wwwroot",
-
   "dependencies": {
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-    "Microsoft.AspNet.Owin": "1.0.0-beta7",
+    "IdentityServer3": "2.0.1",
+    "IdentityServer3.AspNetIdentity": "2.0.0",
+    "IdentityModel": "1.1.0",
+    "IdentityManager": "1.0.0-beta5-*",
+    "IdentityManager.AspNetIdentity": "1.0.0-beta5-1",
+    "IdentityServer3.WsFederation": "2.0.1",
     "Microsoft.AspNet.DataProtection": "1.0.0-beta7",
-
-    "Newtonsoft.Json": "7.0.1",
-    "Serilog": "1.5.9"
+    "Microsoft.AspNet.Owin": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
+    "Serilog": "1.5.11",
+    "AntiXSS": "4.3.0",
+    "Newtonsoft.Json": "7.0.1"
   },
-
   "commands": {
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls https://localhost:5001",
-    "kestrel": "Microsoft.AspNet.Hosting --server Kestrel --server.urls https://localhost:5004"
+    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls https://localhost:5004"
   },
-
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
@@ -24,18 +27,19 @@
         "System.Runtime": ""
       },
       "dependencies": {
-        "IdentityServer3": "2.0.0",
+        "Microsoft.AspNet.Identity.Core": "2.2.1",
+        "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
         "Microsoft.Owin": "3.0.1",
         "Owin.Security.AesDataProtectorProvider": "1.1.0.0",
-        "Owin.Security.Providers": "1.22.1",
+        "Owin.Security.Providers": "1.24.0",
         "Microsoft.Owin.Security.Facebook": "3.0.1",
         "Microsoft.Owin.Security.Google": "3.0.1",
         "Microsoft.Owin.Security.MicrosoftAccount": "3.0.1",
-        "Microsoft.Owin.Security.Twitter": "3.0.1"
+        "Microsoft.Owin.Security.Twitter": "3.0.1",
+
       }
     }
   },
-
   "publishExclude": [
     "node_modules",
     "bower_components",

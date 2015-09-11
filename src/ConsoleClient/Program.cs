@@ -6,8 +6,8 @@ public class Program
 {
     public static void Main()
     {
-        UseToken(GetToken());
-        UseToken(GetUserToken());
+        UseToken(GetToken1());
+        UseToken(GetUserToken1());
     }
 
 
@@ -32,6 +32,24 @@ public class Program
     {
         var client = new TokenClient(
             "https://localhost:44300/connect/token",
+            "carbon",
+            "carbonsecret");
+
+        return client.RequestResourceOwnerPasswordAsync("bob", "bob", "api1").Result;
+    }
+
+    static TokenResponse GetToken1()
+    {
+        var client = new TokenClient(
+             "https://janitor.chinacloudsites.cn/connect/token",
+            "test",
+            "secret");
+        return client.RequestClientCredentialsAsync("api1").Result;
+    }
+    static TokenResponse GetUserToken1()
+    {
+        var client = new TokenClient(
+            "https://janitor.chinacloudsites.cn/connect/token",
             "carbon",
             "carbonsecret");
 
