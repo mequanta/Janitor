@@ -12,15 +12,15 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Dnx.Runtime;
 using Microsoft.AspNet.DataProtection;
 #else
-
+using Microsoft.Owin.Security.DataProtection;
 #endif
 using IdentityServer3.Core.Configuration;
-using IdentityServer3.WsFederation.Configuration;
+//using IdentityServer3.WsFederation.Configuration;
 using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
 using IdentityServer3.Core.Services.InMemory;
-using IdentityServer3.WsFederation.Models;
-using IdentityServer3.WsFederation.Services;
+//using IdentityServer3.WsFederation.Models;
+//using IdentityServer3.WsFederation.Services;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
@@ -66,6 +66,7 @@ namespace Janitor
                         return new DataProtectionTuple(dataProtection.Protect, dataProtection.Unprotect);
                     });
 
+                    builder.UseAesDataProtectorProvider();
                     builder.Map("/admin", adminApp =>
                     {
                         var factory = new IdentityManagerServiceFactory();
@@ -78,7 +79,6 @@ namespace Janitor
                         });
                     });
 
-		            builder.UseAesDataProtectorProvider();
                     builder.UseIdentityServer(options);
                     var appFunc = builder.Build(typeof(Func<IDictionary<string, object>, Task>)) as Func<IDictionary<string, object>, Task>;
                     return appFunc;
@@ -94,6 +94,8 @@ namespace Janitor
                        .MinimumLevel.Debug()
                        .WriteTo.Trace()
                        .CreateLogger();
+            app.UseAesDataProtectorProvider();
+
             BasePath = AppDomain.CurrentDomain.BaseDirectory;
             var certFile = Path.Combine(BasePath, "idsrv3test.pfx");
             Console.WriteLine(certFile);
@@ -105,19 +107,20 @@ namespace Janitor
             //		RequestPath = new PathString("/Content"),
             //		FileSystem = new PhysicalFileSystem(cpath)
             //	});
+
             app.Map("/admin", adminApp =>
             {
                 var factory = new IdentityManagerServiceFactory();
                 factory.ConfigureSimpleIdentityManagerService("AspId");
-                //factory.ConfigureCustomIdentityManagerServiceWithIntKeys("AspId_CustomPK");
+                    var adminOptions = new IdentityManagerOptions
+                        {
+                            Factory = factory,
 
-                adminApp.UseIdentityManager(new IdentityManagerOptions()
-                {
-                    Factory = factory
-                });
+                        };
+                    adminOptions.SecurityConfiguration.RequireSsl = false;
+                    adminApp.UseIdentityManager(adminOptions);
             });
 
-            app.UseAesDataProtectorProvider();
             app.UseIdentityServer(options);
         }
 
@@ -259,10 +262,10 @@ namespace Janitor
 
         private static void ConfigurePlugins(IAppBuilder pluginApp, IdentityServerOptions options)
         {
-            var wfOptions = new WsFederationPluginOptions(options);
-            wfOptions.Factory.Register(new IdentityServer3.Core.Configuration.Registration<IEnumerable<RelyingParty>>(RelyingParties.Get()));
-            wfOptions.Factory.RelyingPartyService = new IdentityServer3.Core.Configuration.Registration<IRelyingPartyService>(typeof(InMemoryRelyingPartyService));
-            pluginApp.UseWsFederationPlugin(wfOptions);
+//            var wfOptions = new WsFederationPluginOptions(options);
+//            wfOptions.Factory.Register(new IdentityServer3.Core.Configuration.Registration<IEnumerable<RelyingParty>>(RelyingParties.Get()));
+//            wfOptions.Factory.RelyingPartyService = new IdentityServer3.Core.Configuration.Registration<IRelyingPartyService>(typeof(InMemoryRelyingPartyService));
+//            pluginApp.UseWsFederationPlugin(wfOptions);
         }
     }
 }

@@ -25,11 +25,11 @@ using IdentityServer3.WsFederation.Results;
 using IdentityServer3.WsFederation.Validation;
 using System;
 using System.ComponentModel;
-using System.IdentityModel.Services;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.IdentityModel.Protocols.WSFederation;
 
 #pragma warning disable 1591
 

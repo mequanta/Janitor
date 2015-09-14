@@ -18,9 +18,9 @@ using IdentityModel.Constants;
 using IdentityServer3.Core.Configuration;
 using System;
 using System.ComponentModel;
-using System.IdentityModel.Metadata;
 using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 #pragma warning disable 1591
 

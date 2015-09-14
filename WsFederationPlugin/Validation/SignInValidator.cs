@@ -18,9 +18,9 @@ using IdentityServer3.WsFederation.Logging;
 using IdentityServer3.WsFederation.Services;
 using System;
 using System.ComponentModel;
-using System.IdentityModel.Services;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Protocols.WSFederation;
 
 #pragma warning disable 1591
 

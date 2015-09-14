@@ -28,7 +28,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,7 +36,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -53,7 +53,6 @@
     <Compile Include="Startup.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Configuration\Clients.cs" />
-    <Compile Include="Configuration\RelyingParties.cs" />
     <Compile Include="Configuration\Scopes.cs" />
     <Compile Include="Configuration\Users.cs" />
   </ItemGroup>
@@ -62,11 +61,10 @@
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0</VSToolsPath>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != '' And '$(Platform)' != 'Unix'" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
@@ -271,17 +269,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\janitor\Core\Core.csproj">
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{FB9E026E-BAB3-498A-A954-B93B05C146A5}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\janitor\IdentityServer3.AspNetIdentity\IdentityServer3.AspNetIdentity.csproj">
+    <ProjectReference Include="..\..\IdentityServer3.AspNetIdentity\IdentityServer3.AspNetIdentity.csproj">
       <Project>{409B7496-B359-40EB-B92B-733F0B1F0088}</Project>
       <Name>IdentityServer3.AspNetIdentity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\janitor\WsFederationPlugin\WsFederationPlugin.csproj">
-      <Project>{4C93CD29-54C0-43CC-BF45-68E0DEC91CAA}</Project>
-      <Name>WsFederationPlugin</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

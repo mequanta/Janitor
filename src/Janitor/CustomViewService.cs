@@ -67,7 +67,7 @@ namespace Janitor
 
         private string LoadHtml(string name)
         {
-            var file = Path.Combine(Startup.BasePath, "Content", "app", name);
+            var file = Path.GetFullPath(Path.Combine(Startup.BasePath, "..", "..", "..", "src", "Janitor", "Content", "app", name));
 			file = string.Format("{0}.html", file);
             return File.ReadAllText(file);
         }

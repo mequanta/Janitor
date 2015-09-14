@@ -16,7 +16,6 @@
 
 using IdentityServer3.WsFederation.Logging;
 using System.ComponentModel;
-using System.IdentityModel.Metadata;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -24,6 +23,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Xml;
+using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 #pragma warning disable 1591
 

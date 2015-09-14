@@ -25,12 +25,11 @@ using IdentityServer3.WsFederation.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IdentityModel.Protocols.WSTrust;
-using System.IdentityModel.Services;
-using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Protocols.WSFederation;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using System.IdentityModel.Tokens;
 
 #pragma warning disable 1591
 
@@ -168,7 +167,7 @@ namespace IdentityServer3.WsFederation.ResponseHandling
             return new ClaimsIdentity(mappedClaims, "idsrv");
         }
 
-        private SecurityToken CreateSecurityToken(SignInValidationResult validationResult, ClaimsIdentity outgoingSubject)
+        private System.IdentityModel.Tokens.SecurityToken CreateSecurityToken(SignInValidationResult validationResult, ClaimsIdentity outgoingSubject)
         {
             var descriptor = new SecurityTokenDescriptor
             {

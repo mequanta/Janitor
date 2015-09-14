@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer3.WsFederation.Models;
+//using IdentityServer3.WsFederation.Models;
 using System.Security.Claims;
 using IdentityModel.Constants;
 

@@ -16,12 +16,12 @@
 
 using IdentityServer3.WsFederation.Logging;
 using System.ComponentModel;
-using System.IdentityModel.Services;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.IdentityModel.Protocols.WSFederation;
 
 #pragma warning disable 1591
 
