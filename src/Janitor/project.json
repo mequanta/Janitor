@@ -31,7 +31,7 @@
         "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
         "Microsoft.Owin": "3.0.1",
         "Owin.Security.AesDataProtectorProvider": "1.1.0.0",
-        "Owin.Security.Providers": "1.24.0",
+        "Owin.Security.Providers": "1.24.1",
         "Microsoft.Owin.Security.Facebook": "3.0.1",
         "Microsoft.Owin.Security.Google": "3.0.1",
         "Microsoft.Owin.Security.MicrosoftAccount": "3.0.1",

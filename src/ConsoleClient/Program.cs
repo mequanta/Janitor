@@ -10,8 +10,8 @@ public class Program
         string local = "https://localhost:44333/connect/token";
 		string remote = "https://janitor.chinacloudsites.cn/connect/token";
 		string apiUrl = "http://localhost:5000/test";
-	   // DoCall(local, apiUrl);
-        DoCall(remote, apiUrl);
+	    DoCall(local, apiUrl);
+       // DoCall(remote, apiUrl);
     }
 	
 	static void DoCall(string tokenUrl, string apiUrl)

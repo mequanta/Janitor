@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using IdentityManager.Configuration;
 using System.Threading.Tasks;
+
 #if DNX451 || DNXCORE50
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
@@ -19,7 +21,9 @@ using IdentityServer3.Core.Services.Default;
 using IdentityServer3.Core.Services.InMemory;
 using IdentityServer3.WsFederation.Models;
 using IdentityServer3.WsFederation.Services;
-
+using Microsoft.Owin;
+using Microsoft.Owin.FileSystems;
+using Microsoft.Owin.StaticFiles;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.MicrosoftAccount;
@@ -33,7 +37,7 @@ namespace Janitor
 {
     using DataProtectionProviderDelegate = Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>>;
     using DataProtectionTuple = Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>;
-    public class Startup
+    public partial class Startup
     {
         public static string BasePath = null;
 #if DNX451 || DNXCORE50
@@ -74,8 +78,8 @@ namespace Janitor
                         });
                     });
 
+		            builder.UseAesDataProtectorProvider();
                     builder.UseIdentityServer(options);
-                    builder.UseAesDataProtectorProvider();
                     var appFunc = builder.Build(typeof(Func<IDictionary<string, object>, Task>)) as Func<IDictionary<string, object>, Task>;
                     return appFunc;
                 });
@@ -84,16 +88,23 @@ namespace Janitor
             app.UseIdentityServer(options);
         }
 #else
-        public void Configuration(IAppBuilder app)
+        public static void Configure(IAppBuilder app)
         {
             Log.Logger = new LoggerConfiguration()
-                           .MinimumLevel.Debug()
-                           .WriteTo.Trace()
-                           .CreateLogger();
+                       .MinimumLevel.Debug()
+                       .WriteTo.Trace()
+                       .CreateLogger();
             BasePath = AppDomain.CurrentDomain.BaseDirectory;
             var certFile = Path.Combine(BasePath, "idsrv3test.pfx");
+            Console.WriteLine(certFile);
             var options = ConfigureIdentityServer(certFile);
 
+            //  var cpath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),"..", "..", "..", "src", "Janitor", "Content"));
+            //  Console.WriteLine(cpath);
+            //  app.UseStaticFiles (new StaticFileOptions {
+            //		RequestPath = new PathString("/Content"),
+            //		FileSystem = new PhysicalFileSystem(cpath)
+            //	});
             app.Map("/admin", adminApp =>
             {
                 var factory = new IdentityManagerServiceFactory();
@@ -106,8 +117,13 @@ namespace Janitor
                 });
             });
 
-            app.UseIdentityServer(options);
             app.UseAesDataProtectorProvider();
+            app.UseIdentityServer(options);
+        }
+
+        public void Configuration(IAppBuilder app)
+        {
+            Configure(app);
         }
 #endif
 
@@ -123,19 +139,19 @@ namespace Janitor
             viewOptions.Stylesheets.Add("/Content/Site.css");
             viewOptions.CacheViews = false;
             factory.ConfigureDefaultViewService(viewOptions);
+            factory.ViewService = new IdentityServer3.Core.Configuration.Registration<IViewService>(typeof(CustomViewService));
 
             //var userService = new LocalRegistrationUserService();
             //factory.UserService = new Registration<IUserService>(resolver => userService);
-            factory.ViewService = new IdentityServer3.Core.Configuration.Registration<IViewService>(typeof(CustomViewService));
             //            factory.UserService = new Registration<IUserService, UserService>();
 
          //   factory.ClaimsProvider = new IdentityServer3.Core.Configuration.Registration<IClaimsProvider>(typeof(CustomClaimsProvider));
-        //    factory.UserService = new IdentityServer3.Core.Configuration.Registration<IUserService>(typeof(CustomUserService));
+         //   factory.UserService = new IdentityServer3.Core.Configuration.Registration<IUserService>(typeof(CustomUserService));
         //    factory.CustomGrantValidators.Add(new IdentityServer3.Core.Configuration.Registration<ICustomGrantValidator>(typeof(CustomGrantValidator)));
-        //    factory.CorsPolicyService = new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService() { AllowAll = true });
-            factory.CorsPolicyService = new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new InMemoryCorsPolicyService(Clients.Get()));
+            factory.CorsPolicyService = new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService() { AllowAll = true });
             var options = new IdentityServerOptions
             {
+                RequireSsl = false,
                 SiteName = "Janitor - Mequanta Identity Service",
                 Factory = factory,
                 SigningCertificate = new X509Certificate2(certFile, "idsrv3test"),
@@ -211,7 +227,7 @@ namespace Janitor
             app.UseGitHubAuthentication(github);
         }
 
-        public static void ConfigureAdditionalIdentityProviders(IAppBuilder app, string signInAsType)
+        private static void ConfigureAdditionalIdentityProviders(IAppBuilder app, string signInAsType)
         {
             var google = new GoogleOAuth2AuthenticationOptions
             {
@@ -240,12 +256,13 @@ namespace Janitor
             };
             app.UseTwitterAuthentication(twitter);
         }
+
         private static void ConfigurePlugins(IAppBuilder pluginApp, IdentityServerOptions options)
         {
-            //var wfOptions = new WsFederationPluginOptions(options);
-            //wfOptions.Factory.Register(new Registration<IEnumerable<RelyingParty>>(RelyingParties.Get()));
-            //wfOptions.Factory.RelyingPartyService = new Registration<IRelyingPartyService>(typeof(InMemoryRelyingPartyService));
-            //pluginApp.UseWsFederationPlugin(wfOptions);
+            var wfOptions = new WsFederationPluginOptions(options);
+            wfOptions.Factory.Register(new IdentityServer3.Core.Configuration.Registration<IEnumerable<RelyingParty>>(RelyingParties.Get()));
+            wfOptions.Factory.RelyingPartyService = new IdentityServer3.Core.Configuration.Registration<IRelyingPartyService>(typeof(InMemoryRelyingPartyService));
+            pluginApp.UseWsFederationPlugin(wfOptions);
         }
     }
 }
