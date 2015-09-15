@@ -17,8 +17,8 @@ namespace Janitor.SelfHost
 				.WriteTo
 				.LiterateConsole(outputTemplate: "{Timestamp:HH:MM} [{Level}] ({Name:l}){NewLine} {Message}{NewLine}{Exception}")
 				.CreateLogger();
-
-			const string url = "http://+:44002/";
+			var port = ((args != null && args.Length > 1) ? args [0] : null) ?? Environment.GetEnvironmentVariable ("PORT") ?? "44002";
+			var url = $"http://+:{port}/";
 			using (WebApp.Start<Startup>(url))
 			{
 				Console.WriteLine("\n\nServer listening at {0}. Press ctrl+c to stop", url);
