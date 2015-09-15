@@ -105,6 +105,7 @@
     <Reference Include="Microsoft.IdentityModel">
       <HintPath>..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\VersionAssemblyInfo.cs">

@@ -10,6 +10,7 @@ namespace Janitor.SelfHost
 	{
 		private static void Main(string[] args)
 		{
+			ManualResetEvent evt = new ManualResetEvent(false);
 			Console.Title = "IdentityServer3 SelfHost";
 
 			Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
@@ -20,8 +21,10 @@ namespace Janitor.SelfHost
 			const string url = "http://+:44002/";
 			using (WebApp.Start<Startup>(url))
 			{
-				Console.WriteLine("\n\nServer listening at {0}. Press enter to stop", url);
-				Console.ReadLine();
+				Console.WriteLine("\n\nServer listening at {0}. Press ctrl+c to stop", url);
+				Console.CancelKeyPress += (sender, e) => evt.Set();
+				evt.WaitOne();
+				Console.WriteLine("Exited");
 			}
 		}
 	}
