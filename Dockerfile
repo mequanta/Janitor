@@ -4,6 +4,6 @@ RUN mkdir -p /usr/src/app/source
 WORKDIR /usr/src/app/source
 COPY . /usr/src/app/source
 RUN nuget restore -NonInteractive
-RUN xbuild
+RUN xbuild /property:Configuration=Debug
 EXPOSE 44002
 CMD ["mono", "SelfHost/bin/Debug/SelfHost.exe"]
