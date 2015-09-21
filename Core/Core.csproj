@@ -517,10 +517,12 @@
     <None Include="Services\DefaultViewService\HttpAssets\scripts.2.0.0.min.js.map">
       <DependentUpon>scripts.2.0.0.min.js</DependentUpon>
     </None>
-    <None Include="Services\DefaultViewService\HttpAssets\styles.css.bundle" />
     <None Include="packages.config" />
     <None Include="Services\DefaultViewService\HttpAssets\styles.css">
-      <DependentUpon>styles.css.bundle</DependentUpon>
+      <DependentUpon>style.min.css</DependentUpon>
+    </None>
+    <None Include="Services\DefaultViewService\HttpAssets\styles.css.bundle">
+      <DependentUpon>style.css</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -573,9 +575,7 @@
     <Content Include="Services\DefaultViewService\HttpAssets\scripts.2.0.0.min.js">
       <DependentUpon>scripts.2.0.0.js</DependentUpon>
     </Content>
-    <EmbeddedResource Include="Services\DefaultViewService\HttpAssets\styles.min.css">
-      <DependentUpon>styles.css</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Services\DefaultViewService\HttpAssets\styles.min.css" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

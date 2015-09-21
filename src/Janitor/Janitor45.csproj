@@ -269,13 +269,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj">
-      <Project>{FB9E026E-BAB3-498A-A954-B93B05C146A5}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\IdentityServer3.AspNetIdentity\IdentityServer3.AspNetIdentity.csproj">
       <Project>{409B7496-B359-40EB-B92B-733F0B1F0088}</Project>
       <Name>IdentityServer3.AspNetIdentity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.csproj">
+      <Project>{FB9E026E-BAB3-498A-A954-B93B05C146A5}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

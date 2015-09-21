@@ -78,12 +78,6 @@
     <None Include="packages.config" />
     <None Include="IdentityServer3.AspNetIdentity.nuspec" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{FB9E026E-BAB3-498A-A954-B93B05C146A5}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -98,4 +92,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{FB9E026E-BAB3-498A-A954-B93B05C146A5}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
