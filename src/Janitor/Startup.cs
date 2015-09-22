@@ -33,11 +33,13 @@ using Owin.Security.Providers.GitHub;
 using Owin.Security.AesDataProtectorProvider;
 using Serilog;
 
+//[assembly: OwinStartupAttribute(typeof(Janitor.Startup))]
+
 namespace Janitor
 {
     using DataProtectionProviderDelegate = Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>>;
     using DataProtectionTuple = Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>;
-    public partial class Startup
+    public class Startup
     {
         public static string BasePath = null;
 #if DNX451 || DNXCORE50

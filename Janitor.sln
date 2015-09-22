@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}"
@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfHost", "SelfHost\SelfHo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Janitor45", "src\Janitor\Janitor45.csproj", "{35445FB8-1F5E-44A9-B8AB-AE1996421141}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Api1", "src\Api1\Api1.xproj", "{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Janitor.Test.Api", "src\Janitor.Test.Api\Janitor.Test.Api.xproj", "{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AzureWebSites|Any CPU = AzureWebSites|Any CPU
@@ -25,12 +29,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.AzureWebSites|Any CPU.ActiveCfg = Debug|Any CPU
-		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.AzureWebSites|Any CPU.Build.0 = Debug|Any CPU
-		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.AzureWebSites|Any CPU.ActiveCfg = AzureWebSites|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.AzureWebSites|Any CPU.Build.0 = AzureWebSites|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{409B7496-B359-40EB-B92B-733F0B1F0088}.AzureWebSites|Any CPU.ActiveCfg = AzureWebSites|Any CPU
 		{409B7496-B359-40EB-B92B-733F0B1F0088}.AzureWebSites|Any CPU.Build.0 = AzureWebSites|Any CPU
 		{409B7496-B359-40EB-B92B-733F0B1F0088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -43,16 +47,30 @@ Global
 		{F088FAAA-F252-4942-A071-13F267AD4F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F088FAAA-F252-4942-A071-13F267AD4F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F088FAAA-F252-4942-A071-13F267AD4F48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.AzureWebSites|Any CPU.ActiveCfg = AzureWebSites|Any CPU
-		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.AzureWebSites|Any CPU.Build.0 = AzureWebSites|Any CPU
-		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB9E026E-BAB3-498A-A954-B93B05C146A5}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
+		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.AzureWebSites|Any CPU.ActiveCfg = Debug|Any CPU
+		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.AzureWebSites|Any CPU.Build.0 = Debug|Any CPU
+		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35445FB8-1F5E-44A9-B8AB-AE1996421141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}.AzureWebSites|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}.AzureWebSites|Any CPU.Build.0 = Debug|Any CPU
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}.AzureWebSites|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}.AzureWebSites|Any CPU.Build.0 = Debug|Any CPU
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7C440D3-A6E2-4E92-A332-EFEFA8AC4B5C} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+		{7CC5F937-7BC2-4A2C-AC83-9BA8B94EB0AF} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
 	EndGlobalSection
 EndGlobal

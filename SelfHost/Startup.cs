@@ -6,6 +6,7 @@ using Microsoft.Owin.StaticFiles;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
 using Janitor;
+
 namespace Janitor.SelfHost
 {
     public class Startup

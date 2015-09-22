@@ -39,6 +39,16 @@ namespace Janitor
                             new ScopeClaim("role")
                         }
                    
+                    },
+                    new Scope
+                    {
+                        Name = "testapi",
+                        DisplayName = "Test Api",
+                        Type = ScopeType.Resource,
+                        Claims= new List<ScopeClaim>
+                        {
+                            new ScopeClaim("role")
+                        }
                     }
                 };
         }
