@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-
 namespace Janitor.Test.Api
 {
     public class RequiredScopesMiddleware

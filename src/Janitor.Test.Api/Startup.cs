@@ -1,32 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.AspNet.Authentication.OAuthBearer;
+using Microsoft.Framework.Configuration;
+using Microsoft.Dnx.Runtime;
+
 namespace Janitor.Test.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
+
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        {
+            var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath);
+            builder.AddJsonFile("config.json");
+            builder.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
+            builder.AddUserSecrets();
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
-
             app.UseStaticFiles();
+            var authority = Configuration["IDP_AUTHORITY"] ?? "http://localhost:44002";
+            var audience = $"{authority}/resources";
             app.UseOAuthBearerAuthentication(options =>
             {
-                options.Authority = "https://localhost:44333";
-                options.Audience = "https://localhost:44333/resources";                
+                options.Authority = authority;
+                options.Audience = audience;
                 options.AutomaticAuthentication = true;
             });
 
