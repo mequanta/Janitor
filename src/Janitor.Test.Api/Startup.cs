@@ -15,9 +15,8 @@ namespace Janitor.Test.Api
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath);
-            builder.AddJsonFile("config.json");
+            builder.AddJsonFile("config.json",optional: true);
             builder.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
-            builder.AddUserSecrets();
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }

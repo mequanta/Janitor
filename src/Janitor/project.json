@@ -1,12 +1,9 @@
 ﻿{
   "webroot": "wwwroot",
   "dependencies": {
-    "IdentityServer3": "2.0.1",
-    "IdentityServer3.AspNetIdentity": "2.0.0",
     "IdentityModel": "1.1.0",
     "IdentityManager": "1.0.0-beta5-*",
     "IdentityManager.AspNetIdentity": "1.0.0-beta5-1",
-    "IdentityServer3.WsFederation": "2.0.1",
     "Microsoft.AspNet.DataProtection": "1.0.0-beta7",
     "Microsoft.AspNet.Owin": "1.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
@@ -36,7 +33,6 @@
         "Microsoft.Owin.Security.Google": "3.0.1",
         "Microsoft.Owin.Security.MicrosoftAccount": "3.0.1",
         "Microsoft.Owin.Security.Twitter": "3.0.1",
-
       }
     }
   },
