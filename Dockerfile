@@ -6,4 +6,4 @@ COPY . /usr/src/app/source
 RUN nuget restore -NonInteractive
 RUN xbuild /property:Configuration=Debug
 EXPOSE 44002
-CMD ["mono", "SelfHost/bin/Debug/SelfHost.exe"]
+CMD ["mono", "Janitor/bin/Debug/Janitor.exe"]
